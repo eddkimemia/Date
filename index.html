@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Will You Go On a Date With Me? 💕</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ========== FLOATING HEARTS CANVAS ========== -->
+  <canvas id="heartsCanvas"></canvas>
+
+  <!-- ========== BACKGROUND MUSIC ========== -->
+  <button class="music-btn" id="musicBtn" aria-label="Toggle music">
+    <span class="music-icon">🎵</span>
+    <span class="music-label">Music</span>
+  </button>
+  <!-- Using a free romantic melody via tone generation in JS -->
+
+  <!-- ========== ROMANTIC QUOTES ROTATOR ========== -->
+  <div class="quotes-rotator" id="quotesRotator">
+    <span class="quote-text" id="quoteText">"Love is not just looking at each other, it's looking in the same direction."</span>
+  </div>
+
+  <!-- ========== LOVE COUNTER ========== -->
+  <div class="love-counter" id="loveCounter">
+    <span class="counter-icon">⏳</span>
+    <span id="counterValue">0</span>
+    <span class="counter-label">seconds I've been waiting for your answer ❤️</span>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  SECTION 1 — LANDING / HERO                                  -->
+  <!-- ============================================================ -->
+  <section class="section hero-section active" id="heroSection">
+    <div class="hero-inner">
+      <!-- Decorative petals -->
+      <div class="petal petal-1">🌸</div>
+      <div class="petal petal-2">🌺</div>
+      <div class="petal petal-3">🌸</div>
+
+      <div class="hero-card glass-card">
+        <div class="hero-sparkle">✨</div>
+
+        <h1 class="hero-greeting" id="heroGreeting">Hey Beautiful ❤️</h1>
+
+        <p class="hero-sub typing-text" id="heroSub">I have something important to ask you...</p>
+
+        <div class="proposal-question" id="proposalQuestion">
+          <h2>Will you go on a date with me? 🥰</h2>
+        </div>
+
+        <!-- YES / NO buttons -->
+        <div class="btn-group" id="btnGroup">
+          <button class="btn-yes" id="yesBtn" onclick="handleYes()">
+            YES ❤️
+          </button>
+          <button class="btn-no" id="noBtn" onclick="handleNo(event)">
+            NO 😢
+          </button>
+        </div>
+
+        <!-- Playful message shown near NO button -->
+        <p class="no-message" id="noMessage"></p>
+      </div>
+
+      <!-- Reasons I Like You Carousel -->
+      <div class="reasons-carousel" id="reasonsCarousel">
+        <div class="reasons-header">Reasons I adore you ✨</div>
+        <div class="reasons-track" id="reasonsTrack">
+          <div class="reason-card">💛 Your smile lights up my entire day</div>
+          <div class="reason-card">🌙 You make ordinary moments feel magical</div>
+          <div class="reason-card">💬 I love every conversation with you</div>
+          <div class="reason-card">✨ You inspire me to be better</div>
+          <div class="reason-card">🌸 Your laugh is my favorite sound</div>
+          <div class="reason-card">💫 You see beauty in everything</div>
+          <div class="reason-card">🔥 Your passion for life is contagious</div>
+          <div class="reason-card">🫂 Your hugs feel like home</div>
+        </div>
+        <div class="reasons-dots" id="reasonsDots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!--  SECTION 2 — YES CELEBRATION                                 -->
+  <!-- ============================================================ -->
+  <section class="section celebration-section" id="celebrationSection">
+    <canvas id="confettiCanvas"></canvas>
+
+    <div class="celebration-inner">
+      <div class="big-heart" id="bigHeart">❤️</div>
+
+      <div class="celebration-card glass-card">
+        <h1 class="celebrate-yay" id="celebrateYay">Yaaay! ❤️</h1>
+        <p class="celebrate-msg">You just made me the happiest person alive.</p>
+        <p class="celebrate-sub">Now let's plan our special date 🥰</p>
+        <button class="btn-continue" onclick="showDateSection()">Let's Plan It 💕</button>
+      </div>
+
+      <!-- Photo Gallery -->
+      <div class="photo-gallery" id="photoGallery">
+        <h3 class="gallery-title">Our Story 📸</h3>
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <div class="photo-placeholder">📷<span>Photo 1</span></div>
+          </div>
+          <div class="gallery-item">
+            <div class="photo-placeholder">📷<span>Photo 2</span></div>
+          </div>
+          <div class="gallery-item">
+            <div class="photo-placeholder">📷<span>Photo 3</span></div>
+          </div>
+          <div class="gallery-item">
+            <div class="photo-placeholder">📷<span>Photo 4</span></div>
+          </div>
+          <div class="gallery-item">
+            <div class="photo-placeholder">📷<span>Photo 5</span></div>
+          </div>
+          <div class="gallery-item">
+            <div class="photo-placeholder">📷<span>Photo 6</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!--  SECTION 3 — DATE & TIME SELECTION                           -->
+  <!-- ============================================================ -->
+  <section class="section date-section" id="dateSection">
+    <div class="date-inner">
+      <div class="date-card glass-card">
+        <div class="date-card-icon">🗓️</div>
+        <h2 class="date-title">Let's Plan Our Date</h2>
+        <p class="date-subtitle">Choose a perfect moment for us ✨</p>
+
+        <div class="form-group">
+          <label for="dateInput" class="form-label">📅 Choose a Date</label>
+          <input type="date" id="dateInput" class="form-input" />
+          <span class="field-error" id="dateError">Please pick a date 💕</span>
+        </div>
+
+        <div class="form-group">
+          <label for="timeInput" class="form-label">⏰ Choose a Time</label>
+          <input type="time" id="timeInput" class="form-input" />
+          <span class="field-error" id="timeError">Please pick a time 💕</span>
+        </div>
+
+        <div class="form-group">
+          <label for="messageInput" class="form-label">💌 Leave me a sweet message</label>
+          <textarea
+            id="messageInput"
+            class="form-textarea"
+            placeholder="Tell me what you're looking forward to..."
+            rows="4"
+          ></textarea>
+          <span class="field-error" id="messageError">A sweet message is required 💕</span>
+        </div>
+
+        <button class="btn-send" id="sendBtn" onclick="handleSend()">
+          Send My Answer 💌
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!--  SECTION 4 — THANK YOU / FINAL SCREEN                        -->
+  <!-- ============================================================ -->
+  <section class="section thankyou-section" id="thankyouSection">
+    <div class="thankyou-inner">
+      <div class="thankyou-card glass-card">
+        <div class="thankyou-heart" id="thankyouHeart">❤️</div>
+        <h1 class="thankyou-title">Thank you for saying YES ❤️</h1>
+        <p class="thankyou-msg">I can't wait to see you.</p>
+
+        <div class="countdown-box" id="countdownBox">
+          <p class="countdown-label">Counting down to our date...</p>
+          <div class="countdown-grid" id="countdownGrid">
+            <div class="countdown-unit">
+              <span id="cdDays">00</span>
+              <label>Days</label>
+            </div>
+            <div class="countdown-unit">
+              <span id="cdHours">00</span>
+              <label>Hours</label>
+            </div>
+            <div class="countdown-unit">
+              <span id="cdMins">00</span>
+              <label>Minutes</label>
+            </div>
+            <div class="countdown-unit">
+              <span id="cdSecs">00</span>
+              <label>Seconds</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
