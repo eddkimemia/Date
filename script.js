@@ -677,6 +677,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (name) {
     const greetingEl = document.getElementById('heroGreeting');
     if (greetingEl) greetingEl.textContent = `Hey ${name} ❤️`;
+
+    const letterGreetingEl = document.getElementById('letterGreeting');
+    if (letterGreetingEl) letterGreetingEl.textContent = `My Dearest ${name},`;
   }
 
   showSection('heroSection');
