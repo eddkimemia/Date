@@ -14,156 +14,122 @@
   <!-- ========== FLOATING HEARTS CANVAS ========== -->
   <canvas id="heartsCanvas"></canvas>
 
-  <!-- ========== BACKGROUND MUSIC ========== -->
+  <!-- ========== NAVIGATION UI ========== -->
   <button class="music-btn" id="musicBtn" aria-label="Toggle music">
     <span class="music-icon">🎵</span>
     <span class="music-label">Music</span>
   </button>
-  <!-- Using a free romantic melody via tone generation in JS -->
 
-  <!-- ========== ROMANTIC QUOTES ROTATOR ========== -->
+  <div class="love-counter" id="loveCounter">
+    <span class="counter-icon">⏳</span>
+    <span id="counterValue">0</span>
+    <span class="counter-label">seconds since you opened this... ❤️</span>
+  </div>
+
   <div class="quotes-rotator" id="quotesRotator">
     <span class="quote-text" id="quoteText">"Love is not just looking at each other, it's looking in the same direction."</span>
   </div>
 
-  <!-- ========== LOVE COUNTER ========== -->
-  <div class="love-counter" id="loveCounter">
-    <span class="counter-icon">⏳</span>
-    <span id="counterValue">0</span>
-    <span class="counter-label">seconds I've been waiting for your answer ❤️</span>
-  </div>
-
   <!-- ============================================================ -->
-  <!--  SECTION 1 — LANDING / HERO                                  -->
+  <!--  SECTION 1 — HERO                                            -->
   <!-- ============================================================ -->
   <section class="section hero-section active" id="heroSection">
-    <div class="hero-inner">
-      <!-- Decorative petals -->
-      <div class="petal petal-1">🌸</div>
-      <div class="petal petal-2">🌺</div>
-      <div class="petal petal-3">🌸</div>
+    <!-- Decorative petals -->
+    <div class="petal petal-1">🌸</div>
+    <div class="petal petal-2">🌺</div>
+    <div class="petal petal-3">🌸</div>
 
-      <div class="hero-card glass-card">
-        <div class="hero-sparkle">✨</div>
+    <div class="hero-card glass-card">
+      <h1 class="hero-greeting" id="heroGreeting">Hey Beautiful ❤️</h1>
+      <p class="hero-sub" id="heroSub">I have something important to ask you...</p>
 
-        <h1 class="hero-greeting" id="heroGreeting">Hey Beautiful ❤️</h1>
-
-        <p class="hero-sub typing-text" id="heroSub">I have something important to ask you...</p>
-
-        <div class="proposal-question" id="proposalQuestion">
-          <h2>Will you go on a date with me? 🥰</h2>
-        </div>
-
-        <!-- YES / NO buttons -->
-        <div class="btn-group" id="btnGroup">
-          <button class="btn-yes" id="yesBtn" onclick="handleYes()">
-            YES ❤️
-          </button>
-          <button class="btn-no" id="noBtn" onclick="handleNo(event)">
-            NO 😢
-          </button>
-        </div>
-
-        <!-- Playful message shown near NO button -->
-        <p class="no-message" id="noMessage"></p>
+      <div class="proposal-question" id="proposalQuestion">
+        <h2>Will you go on a date with me? 🥰</h2>
       </div>
 
-      
+      <div class="btn-group">
+        <button class="btn-yes" id="yesBtn" onclick="handleYes()">YES ❤️</button>
+        <button class="btn-no" id="noBtn" onclick="handleNo(event)">NO 😢</button>
+      </div>
+      <p class="no-message" id="noMessage"></p>
+
+      <div class="reasons-carousel">
+        <div class="reasons-header">Reasons why you're special...</div>
+        <div class="reasons-track" id="reasonsTrack"></div>
+        <div class="reasons-dots" id="reasonsDots"></div>
+      </div>
     </div>
   </section>
 
   <!-- ============================================================ -->
-  <!--  SECTION 2 — YES CELEBRATION                                 -->
+  <!--  SECTION 2 — CELEBRATION                                     -->
   <!-- ============================================================ -->
   <section class="section celebration-section" id="celebrationSection">
     <canvas id="confettiCanvas"></canvas>
+    <div class="celebration-card glass-card">
+      <div class="big-heart">❤️</div>
+      <h1 class="celebrate-yay">Yaaay! ❤️</h1>
+      <p>You've made me the happiest person!</p>
+      <button class="btn-yes" style="margin-top: 1.5rem;" onclick="showDateSection()">Plan Our Date 💕</button>
 
-    <div class="celebration-inner">
-      <div class="big-heart" id="bigHeart">❤️</div>
-
-      <div class="celebration-card glass-card">
-        <h1 class="celebrate-yay" id="celebrateYay">Yaaay! ❤️</h1>
-        <p class="celebrate-msg">You just made me the happiest person alive.</p>
-        <p class="celebrate-sub">Now let's plan our special date 🥰</p>
-        <button class="btn-continue" onclick="showDateSection()">Let's Plan It 💕</button>
+      <div class="photo-gallery">
+        <h2 class="reasons-header">Our Memories ✨</h2>
+        <div class="gallery-grid">
+          <div class="photo-placeholder">📸<span>First Sight</span></div>
+          <div class="photo-placeholder">📸<span>Sweet Smiles</span></div>
+          <div class="photo-placeholder">📸<span>Laughter</span></div>
+          <div class="photo-placeholder">📸<span>Kindness</span></div>
+          <div class="photo-placeholder">📸<span>Joy</span></div>
+          <div class="photo-placeholder">📸<span>Forever</span></div>
+        </div>
       </div>
-
-      
-      
     </div>
   </section>
 
   <!-- ============================================================ -->
-  <!--  SECTION 3 — DATE & TIME SELECTION                           -->
+  <!--  SECTION 3 — PLANNING                                        -->
   <!-- ============================================================ -->
   <section class="section date-section" id="dateSection">
-    <div class="date-inner">
-      <div class="date-card glass-card">
-        <div class="date-card-icon">🗓️</div>
-        <h2 class="date-title">Let's Plan Our Date</h2>
-        <p class="date-subtitle">Choose a perfect moment for us ✨</p>
+    <div class="date-card glass-card">
+      <h2 class="hero-greeting" style="font-size: 2rem;">The Perfect Date</h2>
 
-        <div class="form-group">
-          <label for="dateInput" class="form-label">📅 Choose a Date</label>
-          <input type="date" id="dateInput" class="form-input" />
-          <span class="field-error" id="dateError">Please pick a date 💕</span>
-        </div>
-
-        <div class="form-group">
-          <label for="timeInput" class="form-label">⏰ Choose a Time</label>
-          <input type="time" id="timeInput" class="form-input" />
-          <span class="field-error" id="timeError">Please pick a time 💕</span>
-        </div>
-
-        <div class="form-group">
-          <label for="messageInput" class="form-label">💌 Leave me a sweet message</label>
-          <textarea
-            id="messageInput"
-            class="form-textarea"
-            placeholder="Tell me what you're looking forward to..."
-            rows="4"
-          ></textarea>
-          <span class="field-error" id="messageError">A sweet message is required 💕</span>
-        </div>
-
-        <button class="btn-send" id="sendBtn" onclick="handleSend()">
-          Send My Answer 💌
-        </button>
+      <div class="form-group">
+        <label class="form-label">📅 Date</label>
+        <input type="date" id="dateInput" class="form-input" />
+        <span class="field-error" id="dateError">Please pick a date</span>
       </div>
+
+      <div class="form-group">
+        <label class="form-label">⏰ Time</label>
+        <input type="time" id="timeInput" class="form-input" />
+        <span class="field-error" id="timeError">Please pick a time</span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">💌 Message</label>
+        <textarea id="messageInput" class="form-textarea" rows="3" placeholder="Anything you'd like to add?"></textarea>
+        <span class="field-error" id="messageError">Please leave a message</span>
+        <button class="btn-idea" onclick="generateDateIdea()">Need a date idea? 💡</button>
+      </div>
+
+      <button class="btn-send" id="sendBtn" onclick="handleSend()">Send via WhatsApp 📲</button>
     </div>
   </section>
 
   <!-- ============================================================ -->
-  <!--  SECTION 4 — THANK YOU / FINAL SCREEN                        -->
+  <!--  SECTION 4 — THANK YOU                                       -->
   <!-- ============================================================ -->
   <section class="section thankyou-section" id="thankyouSection">
-    <div class="thankyou-inner">
-      <div class="thankyou-card glass-card">
-        <div class="thankyou-heart" id="thankyouHeart">❤️</div>
-        <h1 class="thankyou-title">Thank you for saying YES ❤️</h1>
-        <p class="thankyou-msg">I can't wait to see you.</p>
+    <div class="thankyou-card glass-card">
+      <div class="big-heart" style="animation: none;">❤️</div>
+      <h1 class="celebrate-yay">It's a Date!</h1>
+      <p>I can't wait to see you soon.</p>
 
-        <div class="countdown-box" id="countdownBox">
-          <p class="countdown-label">Counting down to our date...</p>
-          <div class="countdown-grid" id="countdownGrid">
-            <div class="countdown-unit">
-              <span id="cdDays">00</span>
-              <label>Days</label>
-            </div>
-            <div class="countdown-unit">
-              <span id="cdHours">00</span>
-              <label>Hours</label>
-            </div>
-            <div class="countdown-unit">
-              <span id="cdMins">00</span>
-              <label>Minutes</label>
-            </div>
-            <div class="countdown-unit">
-              <span id="cdSecs">00</span>
-              <label>Seconds</label>
-            </div>
-          </div>
-        </div>
+      <div class="countdown-grid">
+        <div class="countdown-unit"><span id="cdDays">00</span><label>Days</label></div>
+        <div class="countdown-unit"><span id="cdHours">00</span><label>Hrs</label></div>
+        <div class="countdown-unit"><span id="cdMins">00</span><label>Min</label></div>
+        <div class="countdown-unit"><span id="cdSecs">00</span><label>Sec</label></div>
       </div>
     </div>
   </section>
