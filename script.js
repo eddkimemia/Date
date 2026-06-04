@@ -303,6 +303,35 @@ function showDateSection() {
 }
 
 /* ============================================================
+   LOCAL STORAGE PERSISTENCE
+   ============================================================ */
+function saveFormData() {
+  const data = {
+    date: document.getElementById('dateInput')?.value || '',
+    time: document.getElementById('timeInput')?.value || '',
+    message: document.getElementById('messageInput')?.value || ''
+  };
+  localStorage.setItem('proposalFormData', JSON.stringify(data));
+}
+
+function loadFormData() {
+  const saved = localStorage.getItem('proposalFormData');
+  if (saved) {
+    try {
+      const data = JSON.parse(saved);
+      const di = document.getElementById('dateInput');
+      const ti = document.getElementById('timeInput');
+      const mi = document.getElementById('messageInput');
+      if (di && data.date) di.value = data.date;
+      if (ti && data.time) ti.value = data.time;
+      if (mi && data.message) mi.value = data.message;
+    } catch (e) {
+      console.error('Error loading saved data:', e);
+    }
+  }
+}
+
+/* ============================================================
    SEND — WHATSAPP INTEGRATION
    ============================================================ */
 function handleSend() {
@@ -371,6 +400,9 @@ function handleSend() {
     // Fallback if popup blocked
     window.location.href = waURL;
   }
+
+  // Clear local storage after sending
+  localStorage.removeItem('proposalFormData');
 
   // Show thank you screen
   setTimeout(() => {
@@ -569,6 +601,7 @@ function generateDateIdea() {
     msgInput.value = `I was thinking maybe: ${idea}`;
     msgInput.focus();
     clearFieldError('messageError', 'messageInput');
+    saveFormData();
   }
 }
 
@@ -687,6 +720,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initReasonsCarousel();
   initMusicButton();
   setupNoHoverEscape();
+  loadFormData();
 
   const yesBtn = document.getElementById('yesBtn');
   const noBtn = document.getElementById('noBtn');
@@ -705,6 +739,7 @@ document.addEventListener('DOMContentLoaded', () => {
       el.addEventListener('input', () => {
         const errMap = { dateInput:'dateError', timeInput:'timeError', messageInput:'messageError' };
         if (el.value) clearFieldError(errMap[id], id);
+        saveFormData();
       });
     }
   });
