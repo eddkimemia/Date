@@ -308,6 +308,7 @@ function showDateSection() {
 function handleSend() {
   const dateInput    = document.getElementById('dateInput');
   const timeInput    = document.getElementById('timeInput');
+  const locationInput = document.getElementById('locationInput');
   const msgInput     = document.getElementById('messageInput');
 
   let valid = true;
@@ -328,6 +329,14 @@ function handleSend() {
     clearFieldError('timeError', 'timeInput');
   }
 
+  // Validate location
+  if (!locationInput || !locationInput.value.trim()) {
+    showFieldError('locationError', 'locationInput');
+    valid = false;
+  } else {
+    clearFieldError('locationError', 'locationInput');
+  }
+
   // Validate message
   if (!msgInput || !msgInput.value.trim()) {
     showFieldError('messageError', 'messageInput');
@@ -344,6 +353,7 @@ function handleSend() {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
   });
   const timeStr  = dateObj.toLocaleTimeString('en-KE', { hour: '2-digit', minute: '2-digit' });
+  const location = locationInput.value.trim();
   const message  = msgInput.value.trim();
 
   // Store date for countdown
@@ -355,6 +365,7 @@ function handleSend() {
     '',
     `Selected Date: ${dateStr}`,
     `Selected Time: ${timeStr}`,
+    `Location: ${location}`,
     '',
     'My Message:',
     message,
@@ -702,11 +713,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3000);
   }
 
-  ['dateInput','timeInput','messageInput'].forEach(id => {
+  ['dateInput','timeInput','locationInput','messageInput'].forEach(id => {
     const el = document.getElementById(id);
     if (el) {
       el.addEventListener('input', () => {
-        const errMap = { dateInput:'dateError', timeInput:'timeError', messageInput:'messageError' };
+        const errMap = { dateInput:'dateError', timeInput:'timeError', locationInput:'locationError', messageInput:'messageError' };
         if (el.value) clearFieldError(errMap[id], id);
       });
     }
