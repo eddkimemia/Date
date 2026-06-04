@@ -360,21 +360,10 @@ function handleSend() {
   dateTarget = dateObj;
 
   // Build WhatsApp message
-  const waText = [
-    '❤️ DATE ACCEPTED ❤️',
-    '',
-    `Selected Date: ${dateStr}`,
-    `Selected Time: ${timeStr}`,
-    `Location: ${location}`,
-    '',
-    'My Message:',
-    message,
-    '',
-    'I said YES to the date! 🥰',
-  ].join('\n');
+  const waText = `❤️ DATE ACCEPTED ❤️\n\nSelected Date: ${dateStr}\nSelected Time: ${timeStr}\nLocation: ${location}\n\nMy Message:\n${message}\n\nI said YES to the date! 🥰`;
 
   const encoded  = encodeURIComponent(waText);
-  const waURL    = `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
+  const waURL    = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encoded}`;
 
   // Open WhatsApp in a new tab
   const waWindow = window.open(waURL, '_blank');
